@@ -1,0 +1,16 @@
+docker run -d --name workshop-nginx -p 8080:80 nginx
+
+docker port workshop-nginx
+docker logs workshop-nginx
+docker logs -f workshop-nginx
+
+docker exec workshop-nginx sh -c "echo '<h1>Hello Docker Port</h1>' > /usr/share/nginx/html/index.html"
+
+docker run -d --name nginx-a -p 127.0.0.1:8081:80 nginx
+docker run -d --name nginx-b -p 127.0.0.1:8082:80 nginx
+docker exec nginx-a sh -c "echo '<h1>I am nginx a</h1>' > /usr/share/nginx/html/index.html"
+docker exec nginx-b sh -c "echo '<h1>I am nginx b</h1>' > /usr/share/nginx/html/index.html"
+docker exec nginx-a cat /usr/share/nginx/html/index.html
+
+see in web browser
+docker rm -f nginx-a nginx-b
