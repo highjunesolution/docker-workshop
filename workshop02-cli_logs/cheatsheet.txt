@@ -1,0 +1,69 @@
+docker logs
+docker exec
+docker inspect
+docker top
+docker stats
+
+// สร้าง Nginx ใหม่
+docker run -d --name my-nginx nginx
+
+// ตรวจสอบ
+docker ps
+
+// ดู logs ของ Container
+docker logs my-nginx
+
+อาจเห็นประมาณ:
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty...
+/docker-entrypoint.sh: Configuration complete; ready for start up
+
+นี่คือ stdout/stderr ของ application ภายใน container
+
+
+// ดู logs แบบ realtime
+docker logs -f my-nginx
+-f = follow
+
+คล้าย tail -f
+ถ้ามี request เข้ามา nginx log จะโผล่ต่อเนื่อง
+ออกด้วย ctrl + c
+
+// เข้าไปข้างใน Container (linux container)****
+docker exec -it my-nginx bash
+
+docker exec = สั่ง command ภายใน container ที่กำลัง running
+-i = interactive เปิด stdin ไว้ให้เราพิมพ์
+-t = pseudo-TTY สร้าง terminal ให้เรา
+
+ดังนั้น
+docker exec -it my-nginx bash
+อ่านเป็น เปิด bash แบบ interactive terminal ภายใน my-nginx
+
+// container ไม่จำเป็นต้องมี bash
+บาง image มี bash
+บาง image ไม่มี 
+โดยเฉพาะพวก image เล็กๆ เช่น alpine
+
+docker exec -it container bash
+docker exec -it container sh
+Ubuntu / Debian
+       ↓
+      bash
+
+Alpine / minimal image
+       ↓
+       sh
+
+
+command mini challenge
+docker run -d --name workshop-nginx nginx
+docker logs workshop-nginx
+docker logs -f workshop-nginx
+docker exec -it workshop-nginx bash
+cd /usr/share/nginx/html
+echo "<h1>Hello World</h1>" > index.html
+exit
+docker excec workshop-nginx cat /usr/share/nginx/html/index.html
+docker top workshop-nginx
+docker stats workshop-nginx
+docker inspect workshop-nginx
