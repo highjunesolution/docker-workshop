@@ -1,0 +1,48 @@
+docker --version
+
+docker info
+
+docker run hello-world
+
+docker run nginx
+
+docker run -d nginx
+
+docker run -d --name web-server nginx
+
+docker ps
+
+docker ps -a
+
+docker stop web-server
+
+docker start web-server
+
+docker rm web-server
+
+docker rm -f web-server
+
+docker images
+
+docker rmi nginx
+
+docker pull ...
+docker run ...
+docker ps ...
+docker stop ...
+docker start ...
+docker rm ...
+
+Registry
+   │
+   │ pull
+   ▼
+Image
+   │
+   │ run
+   ▼
+Container
+   │
+   ├── start
+   ├── stop
+   └── remove
