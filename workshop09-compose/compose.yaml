@@ -1,0 +1,22 @@
+services:
+  users-api:
+    build: 
+      context: ./users-api
+    environment:
+      PORT: ${USERS_PORT}
+  
+  orders-api:
+    build:
+      context: ./orders-api
+    environment:
+      PORT: ${ORDERS_PORT}
+      USERS_API_URL: http://users-api:${USERS_PORT}
+    ports:
+      - "${ORDERS_HOST_PORT}:${ORDERS_PORT}"
+  
+  redis:
+    image: redis:7
+    volumes:
+      - redis-data:/data
+volumes:
+  redis-data: 
