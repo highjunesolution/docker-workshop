@@ -1,0 +1,21 @@
+@workshop11_dotnetapi_HostAddress = http://localhost:8084
+# @workshop11_dotnetapi_HostAddress = http://localhost:5197
+
+GET {{workshop11_dotnetapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+GET {{workshop11_dotnetapi_HostAddress}}/api/employees/2
+
+###
+GET {{workshop11_dotnetapi_HostAddress}}/api/employees
+
+###
+POST {{workshop11_dotnetapi_HostAddress}}/api/employees
+Content-Type: application/json
+
+{
+    "employeeCode": "260004",
+    "name": "Tony",
+    "department": "IT"
+}
